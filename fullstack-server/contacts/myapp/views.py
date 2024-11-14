@@ -79,7 +79,7 @@ def email(request):
         # Example usage
         sender = 'mentorconnect2364@gmail.com'
         receiver = email
-        subject = 'Test Email'
+        subject = 'Verification Email'
         body = f'Your OTP is: {random_number}\nPlease use this code to complete your verification.For security, don’t share it with anyone.'
         password = 'tjvp hbrs vimf vark'  # Use a secure method to store passwords
 

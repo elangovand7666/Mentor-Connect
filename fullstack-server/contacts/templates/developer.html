@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentor Connect</title>
+    <link rel="icon" href="image1.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url("https://3.bp.blogspot.com/-6AjJM-sxr2s/XLQSmcgKF2I/AAAAAAAAM2M/9DBJIQFR3dwBNsfDa6Ha6OoW36TfmrTTgCLcBGAs/s2560/sundown-landscape-minimalist-c6-2560x1440.jpg");
+            background-size: cover;
+            margin: 0;
+
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;a
+            align-items: center;
+            padding: 10px;
+            background: #4CAF50; /* Green header */
+            color: white;
+            border-radius: 5px;
+        }
+
+        .search-input {
+            padding: 15px;
+            border: none;
+            margin-top:30px;
+            margin-bottom:30px;
+            outline: none;
+            width:400px;
+            flex-grow: 1;
+            font-size: 16px;
+            border-radius:30px 0 0 30px;
+            height: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-button {
+            background: #388E3C; /* Darker green for the button */
+            color: white;
+            border-radius:0px 30px 30px 0px;
+            padding: 0 20px;
+            cursor: pointer;
+            height: 55px;
+            border: none;
+            transition: background 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .search-buttons {
+            margin-left:95%;
+            background: #388E3C; /* Darker green for the button */
+            color: white;
+            border-radius:10px 10px 10px 10px;
+            padding: 0 20px;
+            cursor: pointer;
+            height: 55px;
+            border: none;
+            transition: background 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        li{
+            margin-right:10%;
+            margin-bottom:1%;
+            color: white;
+            border-radius:10px 10px 10px 10px;
+        }
+
+        .search-button:hover {
+            background: #2e7d32; /* Slightly darker green on hover */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            display:flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            padding-bottom: 30px;
+        }
+        
+        .button-container {
+            background: white;
+            border-radius: 10px; /* Reduced border radius for a smaller look */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Reduced shadow for a subtler effect */
+            padding: 10px; /* Reduced padding */
+            width: 15%; /* Smaller width */
+            text-align: center;
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+        .imgs {
+            width: 30%; /* Reduce width to 30% */
+            max-height: 100px; /* Limit the maximum height */
+            padding-bottom: 5%;
+            object-fit: cover; /* Keep the aspect ratio */
+        }
+        
+
+
+        .button-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .imgs {
+            width: 60%;
+            max-height: 350px;
+            padding-bottom: 5%;
+            object-fit: cover;
+        }
+
+        h2 {
+            color: white; /* Dark green for titles */
+        }
+        .button-containers {
+            display: flex;
+            gap: 10px;
+        }
+        buttons {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 30px;
+        }
+        .update-btn {
+            background-color: #4CAF50; /* Light green for update */
+            color: white;
+        }
+        .delete-btn {
+            background-color: #f44336; /* Red for delete */
+            color: white;
+        }
+        button:hover {
+            opacity: 0.8; /* Slight transparency effect on hover */
+        }
+
+        button {
+            background: #388E3C;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+
+        button:hover {
+            background: #2e7d32;
+        }
+
+        @media (max-width: 768px) {
+            .button-container {
+                width: 100%; /* Stacks buttons on smaller screens */
+            }
+            .search-bar {
+                width: 80%;
+            }
+        }
+
+        .foot {
+            margin-top:40%;
+            background: #4CAF50;
+            padding: 0.001%;
+            text-align: center;
+            
+        }
+        .popup-menu {
+            display: none;
+            position: absolute;
+            top: 120px;
+            right: 10%;
+            border-radius: 5px;
+            border-color: #4CAF50;
+            padding: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .popup-menu ul {
+            list-style-type: none;
+            padding: 2px;
+            margin: 0;
+        }
+        .popup-menu li {
+            padding: 10px;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .foot p {
+            color: #f4f4f4;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #ffffff; /* White background for table */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for better separation */
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #d2e8d2; /* Light green for header cells */
+            color: #333;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9; /* Slightly different background color for even rows */
+        }
+        tr:hover {
+            background-color: #c9f2c9; /* Hover effect with a brighter light green */
+        }
+        td {
+            color: #555;
+        }
+        th, td {
+            border: 1px solid #ccc; /* Soft border around cells */
+        }
+        p{
+            color:green;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Connect Your Mentors</h1>
+</header>
+
+
+<center><h2>{{name}} Lists</h2></center>
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Profile</th>
+                <th>Name</th>
+                <th>Specialition</th>
+                <th>Designation</th>
+                <th>Address</th>
+                <th>Email-id</th>
+                <th>Contact</th>
+                <th>Resume</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in l1 %}
+            <tr>
+                <td>
+                    {% if result.0 %}
+                        <img src="{% url 'view_image' result.0 %}" alt="User Image" width="75" height="75">
+                    {% else %}
+                        No File
+                    {% endif %}
+                </td>
+                <td>{{ result.1 }}</td>
+                <td>{{ result.2 }}</td>
+                <td>{{ result.3 }}</td>
+                <td>{{ result.4 }}</td>
+                <td>{{ result.5 }}</td>
+                <td>{{ result.6 }}</td>
+                <td>
+                    {% if result.7 %}
+                        <a href="{% url 'view_pdf' result.7 %}" target="_blank">View PDF</a>
+                    {% else %}
+                        No File
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+
+<footer class="foot">
+    <center><p>&COPY; Designed by Team A20 at 2024</p></center>
+</footer>
+</html>

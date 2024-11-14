@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Admitted Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url("https://3.bp.blogspot.com/-6AjJM-sxr2s/XLQSmcgKF2I/AAAAAAAAM2M/9DBJIQFR3dwBNsfDa6Ha6OoW36TfmrTTgCLcBGAs/s2560/sundown-landscape-minimalist-c6-2560x1440.jpg");
+            background-size: cover;
+            margin: 0;
+            padding: 0px;
+        }
+        header {
+            text-align: center;
+            padding: 10px;
+            background: #4CAF50; /* Darker green for the header */
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds a slight shadow for visual impact */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #ffffff; /* White background for table */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for better separation */
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #d2e8d2; /* Light green for header cells */
+            color: #333;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9; /* Slightly different background color for even rows */
+        }
+        tr:hover {
+            background-color: #c9f2c9; /* Hover effect with a brighter light green */
+        }
+        td {
+            color: #555;
+        }
+        th, td {
+            border: 1px solid #ccc; /* Soft border around cells */
+        }
+        .button-containers {
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .update-btn {
+            background-color: #4CAF50; /* Light green for update */
+            color: white;
+        }
+        .delete-btn {
+            background-color: #f44336; /* Red for delete */
+            color: white;
+        }
+        button:hover {
+            opacity: 0.8; /* Slight transparency effect on hover */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Search Mentors</h1>
+</header>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Profile</th>
+                <th>Name</th>
+                <th>Specialition</th>
+                <th>Designation</th>
+                <th>Address</th>
+                <th>Email-id</th>
+                <th>Contact</th>
+                <th>Resume</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in rr %}
+            <tr>
+                <td>
+                    {% if result.0 %}
+                        <img src="{% url 'view_image' result.0 %}" alt="User Image" width="75" height="75">
+                    {% else %}
+                        No File
+                    {% endif %}
+                </td>
+                <td>{{ result.1 }}</td>
+                <td>{{ result.2 }}</td>
+                <td>{{ result.3 }}</td>
+                <td>{{ result.4 }}</td>
+                <td>{{ result.5 }}</td>
+                <td>{{ result.6 }}</td>
+                <td>
+                    {% if result.7 %}
+                        <a href="{% url 'view_pdf' result.7 %}" target="_blank">View PDF</a>
+                    {% else %}
+                        No File
+                    {% endif %}
+                </td>
+                <td>
+                    <div class="button-containers">
+                        <form action="{% url 'update' result.7 result.0%}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="name" value="{{ result.1 }}"> <!-- Name -->
+                            <input type="hidden" name="speciality" value="{{ result.2 }}"> <!-- Phone -->
+                            <input type="hidden" name="bio" value="{{ result.3 }}"> <!-- Email -->
+                            <input type="hidden" name="address" value="{{ result.4 }}"> <!-- Address -->
+                            <input type="hidden" name="email" value="{{result.5}}">
+                            <input type="hidden" name="phone" value="{{ result.6 }}"> <!-- Bio -->
+                            <input type="hidden" name="file" value="{{ result.7 }}">
+                            <button type="submit" class="update-btn">Update</button>
+                        </form>
+    
+                        <form action="{% url 'delete' result.7 result.0%}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="phone" value="{{ result.6 }}"> <!-- Phone for deletion -->
+                            <button type="submit" class="delete-btn">Delete</button>
+                        </form>
+                        
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    
+</div>
+
+</body>
+</html>

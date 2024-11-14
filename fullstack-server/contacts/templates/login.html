@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Mentor</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous" />
+    <style>
+        body {
+            background-color: #e6ffe6; /* Light green background */
+            color: black;
+            font-size: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Full viewport height */
+            margin: 0; /* Remove default margin */
+        }
+
+        .bg {
+            background: url("https://3.bp.blogspot.com/-6AjJM-sxr2s/XLQSmcgKF2I/AAAAAAAAM2M/9DBJIQFR3dwBNsfDa6Ha6OoW36TfmrTTgCLcBGAs/s2560/sundown-landscape-minimalist-c6-2560x1440.jpg");
+            background-size: cover;
+            position: fixed; /* Position behind form */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.8;
+            z-index: -1; /* Send background behind the form */
+        }
+
+        .login {
+            background-color: rgba(200, 255, 200, 0.8); /* Light green form background */
+            width: 600px;
+            padding: 40px;
+            text-align: center;
+            border-radius: 10px;
+            z-index: 1; /* Keep form above background */
+        }
+
+        h1 {
+            color: #ffffff; /* White color for h1 */
+            margin-bottom: 20px;
+        }
+
+        .login > h2 {
+            margin: 20px 10px;
+            padding-bottom: 5px;
+            color: #006400; /* Dark green header color */
+        }
+
+        .login input[type="text"],
+        .login button[type="submit"] {
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+            width: 500px;
+            background: white;
+            border: 1px solid #006400; /* Dark green border */
+            border-radius: 30px;
+            transition: 0.8s;
+            color: black; /* Input text color */
+        }
+
+        .login button[type="submit"] {
+            background-color:  #4CAF50; /* Light green background by default */
+            border: 0.5px solid #006400;
+            width: 100px;
+            border-radius: 15px;
+            transition: 0.6s;
+            cursor: pointer; /* Change cursor to pointer */
+            color: white; /* Dark green text color */
+        }
+
+        .login button[type="submit"]:hover {
+            background-color: #006400; /* Dark green background on hover */
+            color: white; /* White text color on hover */
+        }
+
+
+        p {
+            margin-top: 20px; /* Add spacing */
+        }
+
+        /* Toast Styles */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: red;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 16px;
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        #toast.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        @keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Connect your Mentors</h1>
+    <div class="bg"></div>
+    <form class="login" action="{% url 'email' %}" method="POST">
+        {% csrf_token %}
+        <h2><b>Enter Your Mail</b></h2>
+        <input type="text" name="email" placeholder="Kongu Email Only" required>
+        <button type="submit">Next</button>
+    </form>
+
+    <!-- Toast Notification -->
+    <div id="toast"></div>
+
+    <script>
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.innerText = message;
+            toast.className = "show";
+            setTimeout(function() { toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+    
+        window.onload = function() {
+            {% if messages %}
+                {% for message in messages %}
+                    showToast("{{ message }}");
+                {% endfor %}
+            {% endif %}
+        };
+    </script>
+</body>
+</html>

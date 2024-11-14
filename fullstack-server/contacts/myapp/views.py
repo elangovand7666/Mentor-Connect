@@ -77,11 +77,11 @@ def email(request):
                 print(f"Failed to send email. Error: {str(e)}")
 
         # Example usage
-        sender = 'sekartmrelangovan@gmail.com'
+        sender = 'mentorconnect2364@gmail.com'
         receiver = email
         subject = 'Test Email'
         body = f'Your OTP is: {random_number}\nPlease use this code to complete your verification.For security, don’t share it with anyone.'
-        password = 'tvpq iysg qdqy agjx'  # Use a secure method to store passwords
+        password = 'tjvp hbrs vimf vark'  # Use a secure method to store passwords
 
         send_email(sender, receiver, subject, body, password)
         return render(request,'email.html',{'fotp':random_number})

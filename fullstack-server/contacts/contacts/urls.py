@@ -26,5 +26,5 @@ urlpatterns = [
     path('search/',views.search,name='search'),
     path('view_pdf/<file_id>/',views.view_pdf,name='view_pdf'),
     path('view_image/<str:file_id>/', views.view_image, name='view_image'),
-    path('/connect',views.connect,name='connect'),
+    path('connect/',views.connect,name='connect'),
 ]
